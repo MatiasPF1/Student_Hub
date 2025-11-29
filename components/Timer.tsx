@@ -3,11 +3,12 @@ import React from "react";
 interface TimerProps {
   stage: number;
   switchStage: (value: number) => void;
+  getTickingTime: () => number;
 }
 
 
 
-export default function Timer({stage, switchStage}: TimerProps) {
+export default function Timer({stage, switchStage, getTickingTime}: TimerProps) {
   const options = ["Classic Pomodoro", "Short Breaks", "Long Breaks"];
   return (
     <div className="w-10/12 mx-auto pt-5 text-white flex flex-col justify-center items-center mt-10">
@@ -15,9 +16,8 @@ export default function Timer({stage, switchStage}: TimerProps) {
         {options.map((option, index) => {
           return (
             <h1
-              key={index}className={`${
-                index === stage ? "bg-gray-500 bg-opacity-30" : ""
-              } p-1 cursor-pointer transition-all rounded`}
+              key={index}
+              className={`${index === stage ? "bg-gray-500 bg-opacity-30" : ""} p-1 cursor-pointer transition-all rounded`}
               onClick={()=>switchStage(index)}
             >
               {option}
@@ -25,11 +25,11 @@ export default function Timer({stage, switchStage}: TimerProps) {
           );
         })}
       </div>
-      
+
       <div>
             <div className="mt-10 mb-10">
                     <h1 className="text-8xl font-bold select-none ">
-                        25:00
+                        {getTickingTime()}:00
                     </h1>
             </div>
       </div>
